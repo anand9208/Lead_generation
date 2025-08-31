@@ -1,25 +1,18 @@
-const express = require('express');
+const express = require("express");
+const Lead = require("../models/Lead");
 const router = express.Router();
-const Lead = require('../models/Lead');
 
-router.get('/', async (req, res) => {
-  try {
-    const leads = await Lead.find();
-    res.json(leads);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// Get all leads
+router.get("/", async (req, res) => {
+  const leads = await Lead.find();
+  res.json(leads);
 });
 
-router.post('/', async (req, res) => {
-  const { name, email, phone } = req.body;
-  const lead = new Lead({ name, email, phone });
-  try {
-    const newLead = await lead.save();
-    res.status(201).json(newLead);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// Create a new lead
+router.post("/", async (req, res) => {
+  const lead = new Lead(req.body);
+  await lead.save();
+  res.status(201).json(lead);
 });
 
 module.exports = router;
