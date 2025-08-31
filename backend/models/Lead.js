@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const LeadSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  phone: { type: String },
-  createdAt: { type: Date, default: Date.now }
+const leadSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  phone: String,
 });
 
-module.exports = mongoose.model('Lead', LeadSchema);
+module.exports = mongoose.model("Lead", leadSchema);
